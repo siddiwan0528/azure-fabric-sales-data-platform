@@ -1,0 +1,15 @@
+{
+	"name": "adf-fabric-sales-portfolio",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bf70d27e-f0eb-4305-a847-48b73a81a19a",
+		"tenantId": "2f97ab93-e7aa-4012-8a7a-d69234556a7f"
+	}
+}
