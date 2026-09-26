@@ -1,0 +1,11 @@
+{
+	"name": "ls_adls_sales",
+	"properties": {
+		"description": "Managed identity connection from Azure Data Factory to ADLS Gen2 sales landing zone.",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stfabricportfolio61.dfs.core.windows.net/"
+		}
+	}
+}
