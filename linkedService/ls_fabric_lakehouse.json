@@ -1,0 +1,12 @@
+{
+	"name": "ls_fabric_lakehouse",
+	"properties": {
+		"annotations": [],
+		"type": "Lakehouse",
+		"typeProperties": {
+			"workspaceId": "a8acdceb-3966-4eb9-ab23-cae23ed6dd5a",
+			"artifactId": "4af6fc00-e312-4313-8ff4-d3a2cacf3b2e",
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
