@@ -1,0 +1,87 @@
+{
+	"name": "ds_sales_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_sales",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sales",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sales_data.xlsx",
+				"folderPath": "sales",
+				"fileSystem": "landing"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "OrderID",
+				"type": "String"
+			},
+			{
+				"name": "OrderLineID",
+				"type": "String"
+			},
+			{
+				"name": "OrderDate",
+				"type": "String"
+			},
+			{
+				"name": "LoadTimestamp",
+				"type": "String"
+			},
+			{
+				"name": "CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "ProductID",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "SalesChannel",
+				"type": "String"
+			},
+			{
+				"name": "PaymentMethod",
+				"type": "String"
+			},
+			{
+				"name": "Quantity",
+				"type": "String"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "DiscountPct",
+				"type": "String"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "String"
+			},
+			{
+				"name": "CostAmount",
+				"type": "String"
+			},
+			{
+				"name": "ProfitAmount",
+				"type": "String"
+			},
+			{
+				"name": "OrderStatus",
+				"type": "String"
+			}
+		]
+	}
+}
