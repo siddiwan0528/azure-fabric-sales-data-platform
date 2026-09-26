@@ -1,0 +1,236 @@
+{
+	"name": "pl_ingest_sales",
+	"properties": {
+		"activities": [
+			{
+				"name": "cpy_sales_excel_to_fabric",
+				"description": "Ingest synthetic sales Excel data from ADLS Gen2 landing zone into the Fabric Bronze Lakehouse.",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "LakehouseTableSink",
+						"tableActionOption": "Append",
+						"partitionOption": "None"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "OrderID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OrderID",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "OrderLineID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OrderLineID",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "OrderDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OrderDate",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "LoadTimestamp",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LoadTimestamp",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CustomerID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CustomerID",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProductID",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "Region",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Region",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesChannel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalesChannel",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "PaymentMethod",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PaymentMethod",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "Quantity",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Quantity",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "UnitPrice",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "UnitPrice",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "DiscountPct",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DiscountPct",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "SalesAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalesAmount",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "CostAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CostAmount",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "ProfitAmount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ProfitAmount",
+									"physicalType": "string"
+								}
+							},
+							{
+								"source": {
+									"name": "OrderStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OrderStatus",
+									"physicalType": "string"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_sales_excel",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sales_bronze",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

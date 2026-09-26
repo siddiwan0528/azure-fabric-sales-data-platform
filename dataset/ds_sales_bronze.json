@@ -1,0 +1,16 @@
+{
+	"name": "ds_sales_bronze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_fabric_lakehouse",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "LakehouseTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "sales_bronze",
+			"table": "dbo"
+		}
+	}
+}
