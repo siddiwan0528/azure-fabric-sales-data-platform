@@ -1,0 +1,11 @@
+expression 'DirectLake - lh_sales_bronze' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/a8acdceb-3966-4eb9-ab23-cae23ed6dd5a/4af6fc00-e312-4313-8ff4-d3a2cacf3b2e", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 573d366d-cc4c-4268-b8f3-22114516c156
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_bronze].[sales_targets_bronze]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_bronze].[dbo]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_bronze].[products_bronze]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_bronze].[customers_bronze]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_gold].[monthly_regional_kpis]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_silver].[sales_quarantine]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[sales_silver].[sales]"}},"objectType":"Table"}]
+

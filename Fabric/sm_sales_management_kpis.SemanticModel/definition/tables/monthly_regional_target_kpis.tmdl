@@ -1,0 +1,239 @@
+table monthly_regional_target_kpis
+	lineageTag: 70c21a16-8c55-4cb1-afc8-262cb9dc175e
+	sourceLineageTag: [sales_gold].[monthly_regional_target_kpis]
+
+	measure 'Total Revenue' =
+			
+			SUM('monthly_regional_target_kpis'[Revenue])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: b45c9efa-aba2-4a3e-ac08-eaccfbd4cdc5
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Profit' =
+			
+			SUM('monthly_regional_target_kpis'[Profit])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: dde05da9-0ceb-46b4-953a-f0d6ced7c0e6
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Sales Target (Actual Periods)' =
+			
+			CALCULATE(
+			    SUM('monthly_regional_target_kpis'[SalesTarget]),
+			    'monthly_regional_target_kpis'[ActualsAvailable] = TRUE()
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 49c960cb-e34c-47d6-adb6-e7b7cc6ee83d
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Target Variance' =
+			
+			[Total Revenue] - [Sales Target (Actual Periods)]
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: 89e2f390-0e07-48f1-9e9c-3d7927b74c5c
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Target Achievement %' =
+			
+			DIVIDE(
+			    [Total Revenue],
+			    [Sales Target (Actual Periods)]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 97b96133-a39a-49a0-969a-f61b311fc823
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Profit Margin %' =
+			
+			DIVIDE(
+			    [Total Profit],
+			    [Total Revenue]
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 971ab19a-0baf-420c-aacf-dbbddd36c43c
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Total Orders' =
+			
+			SUM('monthly_regional_target_kpis'[Orders])
+		formatString: 0
+		lineageTag: d85e327c-1a3b-4e8e-bbcf-00a4f6d969c8
+
+		changedProperty = Name
+
+	measure 'Units Sold' =
+			
+			SUM('monthly_regional_target_kpis'[UnitsSold])
+		formatString: 0
+		lineageTag: 838850e2-df9c-4d3d-b86c-802034182914
+
+		changedProperty = Name
+
+	column MonthStart
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f7f94c7f-d4d5-4564-a781-e95593bd77de
+		sourceLineageTag: MonthStart
+		summarizeBy: none
+		sourceColumn: MonthStart
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 8f2eed91-e072-4640-9d3e-a0fba58f011e
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesTarget
+		dataType: double
+		lineageTag: 32a430a2-6b94-4382-bcb5-32f34d17c318
+		sourceLineageTag: SalesTarget
+		summarizeBy: sum
+		sourceColumn: SalesTarget
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Orders
+		dataType: int64
+		formatString: 0
+		lineageTag: bf09c248-6f9e-4f36-a2ba-fa33f4c2a396
+		sourceLineageTag: Orders
+		summarizeBy: sum
+		sourceColumn: Orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitsSold
+		dataType: int64
+		formatString: 0
+		lineageTag: 045a9f0d-288e-46a5-b9f5-e594d06015db
+		sourceLineageTag: UnitsSold
+		summarizeBy: sum
+		sourceColumn: UnitsSold
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		lineageTag: ebef4381-6969-4c99-b8d7-dc6b999ad93b
+		sourceLineageTag: Revenue
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cost
+		dataType: double
+		lineageTag: 41f0be80-64d3-475c-94aa-4de7c59f4a5c
+		sourceLineageTag: Cost
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: e3ef13b7-abd0-42d4-889c-f5908fe66239
+		sourceLineageTag: Profit
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AverageOrderValue
+		dataType: double
+		lineageTag: b2cb6a55-266d-4b25-bfb8-4d8084497bc6
+		sourceLineageTag: AverageOrderValue
+		summarizeBy: sum
+		sourceColumn: AverageOrderValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProfitMarginPct
+		dataType: double
+		lineageTag: 41c6f217-e0f6-4486-b8c2-ab821c69f4d5
+		sourceLineageTag: ProfitMarginPct
+		summarizeBy: sum
+		sourceColumn: ProfitMarginPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Variance
+		dataType: double
+		lineageTag: 08466790-2ca7-45a1-867d-fcdf538d53d7
+		sourceLineageTag: Variance
+		summarizeBy: sum
+		sourceColumn: Variance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AchievementPct
+		dataType: double
+		lineageTag: 3faf7f73-1a2b-4d16-b167-66337dfe1bd2
+		sourceLineageTag: AchievementPct
+		summarizeBy: sum
+		sourceColumn: AchievementPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ActualsAvailable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 64271ba4-7d42-48fc-b2ef-ddbae895342c
+		sourceLineageTag: ActualsAvailable
+		summarizeBy: none
+		sourceColumn: ActualsAvailable
+
+		annotation SummarizationSetBy = Automatic
+
+	partition monthly_regional_target_kpis = entity
+		mode: directLake
+		source
+			entityName: monthly_regional_target_kpis
+			schemaName: sales_gold
+			expressionSource: 'DirectLake - lh_sales_bronze'
+
