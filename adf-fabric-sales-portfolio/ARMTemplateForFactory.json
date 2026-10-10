@@ -1,0 +1,517 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adf-fabric-sales-portfolio"
+		},
+		"ls_adls_sales_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://stfabricportfolio61.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_ingest_sales')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "cpy_sales_excel_to_fabric",
+						"description": "Ingest synthetic sales Excel data from ADLS Gen2 landing zone into the Fabric Bronze Lakehouse.",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "LakehouseTableSink",
+								"tableActionOption": "Append",
+								"partitionOption": "None"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "OrderID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OrderID",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "OrderLineID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OrderLineID",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "OrderDate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OrderDate",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "LoadTimestamp",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "LoadTimestamp",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "CustomerID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CustomerID",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProductID",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "Region",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Region",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesChannel",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SalesChannel",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "PaymentMethod",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PaymentMethod",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "Quantity",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Quantity",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "UnitPrice",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "UnitPrice",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "DiscountPct",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DiscountPct",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesAmount",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SalesAmount",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "CostAmount",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CostAmount",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "ProfitAmount",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ProfitAmount",
+											"physicalType": "string"
+										}
+									},
+									{
+										"source": {
+											"name": "OrderStatus",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OrderStatus",
+											"physicalType": "string"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_sales_excel",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sales_bronze",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_sales_excel')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sales_bronze')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sales_bronze')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_fabric_lakehouse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "LakehouseTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "sales_bronze",
+					"table": "dbo"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_fabric_lakehouse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sales_excel')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_sales",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sales",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "sales_data.xlsx",
+						"folderPath": "sales",
+						"fileSystem": "landing"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "OrderID",
+						"type": "String"
+					},
+					{
+						"name": "OrderLineID",
+						"type": "String"
+					},
+					{
+						"name": "OrderDate",
+						"type": "String"
+					},
+					{
+						"name": "LoadTimestamp",
+						"type": "String"
+					},
+					{
+						"name": "CustomerID",
+						"type": "String"
+					},
+					{
+						"name": "ProductID",
+						"type": "String"
+					},
+					{
+						"name": "Region",
+						"type": "String"
+					},
+					{
+						"name": "SalesChannel",
+						"type": "String"
+					},
+					{
+						"name": "PaymentMethod",
+						"type": "String"
+					},
+					{
+						"name": "Quantity",
+						"type": "String"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "String"
+					},
+					{
+						"name": "DiscountPct",
+						"type": "String"
+					},
+					{
+						"name": "SalesAmount",
+						"type": "String"
+					},
+					{
+						"name": "CostAmount",
+						"type": "String"
+					},
+					{
+						"name": "ProfitAmount",
+						"type": "String"
+					},
+					{
+						"name": "OrderStatus",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_sales')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_adls_sales')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Managed identity connection from Azure Data Factory to ADLS Gen2 sales landing zone.",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_adls_sales_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_fabric_lakehouse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Lakehouse",
+				"typeProperties": {
+					"workspaceId": "a8acdceb-3966-4eb9-ab23-cae23ed6dd5a",
+					"artifactId": "4af6fc00-e312-4313-8ff4-d3a2cacf3b2e",
+					"authenticationType": "SystemAssignedManagedIdentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_customers_excel')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_sales",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Customers",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "sales_data.xlsx",
+						"folderPath": "sales",
+						"fileSystem": "landing"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "CustomerID",
+						"type": "String"
+					},
+					{
+						"name": "CustomerName",
+						"type": "String"
+					},
+					{
+						"name": "Segment",
+						"type": "String"
+					},
+					{
+						"name": "Region",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "SignupDate",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_sales')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_products_excel')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_sales",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Products",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "sales_data.xlsx",
+						"folderPath": "sales",
+						"fileSystem": "landing"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "ProductID",
+						"type": "String"
+					},
+					{
+						"name": "ProductName",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					},
+					{
+						"name": "SubCategory",
+						"type": "String"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "String"
+					},
+					{
+						"name": "UnitCost",
+						"type": "String"
+					},
+					{
+						"name": "IsActive",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_sales')]"
+			]
+		}
+	]
+}
