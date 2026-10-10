@@ -1,0 +1,35 @@
+{
+	"name": "ds_sales_targets_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_sales",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "SalesTargets",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sales_data.xlsx",
+				"folderPath": "sales",
+				"fileSystem": "landing"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "MonthStart",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "SalesTarget",
+				"type": "String"
+			}
+		]
+	}
+}
