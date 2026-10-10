@@ -1,0 +1,51 @@
+{
+	"name": "ds_products_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_sales",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Products",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sales_data.xlsx",
+				"folderPath": "sales",
+				"fileSystem": "landing"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ProductID",
+				"type": "String"
+			},
+			{
+				"name": "ProductName",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "SubCategory",
+				"type": "String"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "UnitCost",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			}
+		]
+	}
+}
