@@ -8,6 +8,12 @@ An end-to-end data engineering portfolio project demonstrating Azure Data Factor
 
 The platform ingests sales and reference data from an Excel workbook stored in Azure Data Lake Storage Gen2, processes it through Bronze, Silver, and Gold layers in Microsoft Fabric, and presents business performance through a Power BI management dashboard.
 
+## Dashboard Preview
+
+The Sales Management KPI Dashboard provides an executive overview of revenue, profit, target achievement, and regional sales performance, with interactive Month and Region filters.
+
+![Sales Management KPI Dashboard](docs/screenshots/Sales%20Management%20Dashboard.png)
+
 ## Architecture
 
 ```mermaid
