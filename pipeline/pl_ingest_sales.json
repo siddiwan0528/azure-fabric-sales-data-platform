@@ -26,7 +26,7 @@
 					},
 					"sink": {
 						"type": "LakehouseTableSink",
-						"tableActionOption": "Append",
+						"tableActionOption": "OverwriteSchema",
 						"partitionOption": "None"
 					},
 					"enableStaging": false,
