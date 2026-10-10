@@ -469,3 +469,34 @@ display(
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# CELL ********************
+
+from pyspark.sql import functions as F
+
+sales = spark.table("sales_silver.sales")
+
+monthly_check = (
+    sales
+    .withColumn("OrderDate", F.to_date("OrderDate"))
+    .withColumn("MonthStart", F.trunc("OrderDate", "month"))
+    .groupBy("MonthStart")
+    .agg(
+        F.count("*").alias("OrderRows"),
+        F.round(
+            F.sum(F.col("SalesAmount").cast("double")), 2
+        ).alias("Revenue"),
+        F.countDistinct("Region").alias("Regions"),
+        F.max("OrderDate").alias("LastOrderDate")
+    )
+    .orderBy(F.col("MonthStart").desc())
+)
+
+display(monthly_check.limit(6))
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
