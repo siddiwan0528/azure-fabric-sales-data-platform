@@ -1,0 +1,47 @@
+{
+	"name": "ds_customers_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_sales",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Customers",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sales_data.xlsx",
+				"folderPath": "sales",
+				"fileSystem": "landing"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "CustomerID",
+				"type": "String"
+			},
+			{
+				"name": "CustomerName",
+				"type": "String"
+			},
+			{
+				"name": "Segment",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "SignupDate",
+				"type": "String"
+			}
+		]
+	}
+}
