@@ -1,3 +1,4 @@
-# Dashboard Screenshots
+## Dashboard Preview
 
-Screenshots of the Power BI Sales Management KPI Dashboard and project validation results.
+The dashboard summarizes revenue, profit, target achievement, and regional sales performance through interactive Month and Region filters.
+
