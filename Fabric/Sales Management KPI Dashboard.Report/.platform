@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Sales Management KPI Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e7bedf38-31a4-ae5b-4e75-19ded336fd44"
+  }
+}

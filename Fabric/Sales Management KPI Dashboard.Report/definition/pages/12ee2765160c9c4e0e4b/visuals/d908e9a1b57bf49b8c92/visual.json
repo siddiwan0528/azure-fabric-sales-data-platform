@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "d908e9a1b57bf49b8c92",
+  "position": {
+    "x": 0,
+    "y": 240.97724550898207,
+    "z": 1,
+    "height": 150,
+    "width": 281,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "monthly_regional_target_kpis"
+                    }
+                  },
+                  "Property": "Target Achievement %"
+                }
+              },
+              "queryRef": "monthly_regional_target_kpis.Target Achievement %",
+              "nativeQueryRef": "Target Achievement %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "monthly_regional_target_kpis"
+                  }
+                },
+                "Property": "Target Achievement %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "bd4ea006b726c917684c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "monthly_regional_target_kpis"
+              }
+            },
+            "Property": "Target Achievement %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
