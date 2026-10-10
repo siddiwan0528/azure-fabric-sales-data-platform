@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "846bc94c29f893ca8d87",
   "position": {
-    "x": 607.04191616766468,
-    "y": 257.53293413173657,
+    "x": 1370.4431137724553,
+    "y": 0,
     "z": 3,
-    "height": 150,
-    "width": 281,
+    "height": 136.12455089820361,
+    "width": 281.44670658682639,
     "tabOrder": 3
   },
   "visual": {
@@ -28,7 +28,7 @@
               },
               "queryRef": "monthly_regional_target_kpis.Target Variance",
               "nativeQueryRef": "Target Variance",
-              "format": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############"
+              "format": "\\$#,0.00;(\\$#,0.00);\\$#,0.00"
             }
           ]
         }

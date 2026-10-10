@@ -1,0 +1,165 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "a189423623df413ba224",
+  "position": {
+    "x": 0,
+    "y": 237.29820359281439,
+    "z": 4,
+    "height": 397.33652694610782,
+    "width": 1651.8898203592817,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "monthly_regional_target_kpis"
+                    }
+                  },
+                  "Property": "MonthStart"
+                }
+              },
+              "queryRef": "monthly_regional_target_kpis.MonthStart",
+              "nativeQueryRef": "MonthStart",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "monthly_regional_target_kpis"
+                    }
+                  },
+                  "Property": "Total Revenue"
+                }
+              },
+              "queryRef": "monthly_regional_target_kpis.Total Revenue",
+              "nativeQueryRef": "Total Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "monthly_regional_target_kpis"
+                    }
+                  },
+                  "Property": "Sales Target (Actual Periods)"
+                }
+              },
+              "queryRef": "monthly_regional_target_kpis.Sales Target (Actual Periods)",
+              "nativeQueryRef": "Sales Target (Actual Periods)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "monthly_regional_target_kpis"
+                  }
+                },
+                "Property": "MonthStart"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Monthly Revenue vs Sales Target'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9c0c3a955892c364cf18",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "monthly_regional_target_kpis"
+              }
+            },
+            "Property": "MonthStart"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "37a4fc77c37c42d2e76d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "monthly_regional_target_kpis"
+              }
+            },
+            "Property": "Total Revenue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3961610e87901fb71852",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "monthly_regional_target_kpis"
+              }
+            },
+            "Property": "Sales Target (Actual Periods)"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
